@@ -45,4 +45,4 @@ TODO:
 
 ## Module 3
 
-TODO:	
+See the [documentation](m3/README.md) in m3.	
