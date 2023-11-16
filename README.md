@@ -37,11 +37,11 @@ rm /tmp/kmi_sensor*
 
 ### Integrated Raw data to real versioned LDES ft. SDS
 
-TODO: Arthur
+See other branch (generate), still needs to be merged
 
 ## Module 2
 
-TODO:
+See the [module 2](./module2) directory
 
 ## Module 3
 
