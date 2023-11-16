@@ -4,14 +4,64 @@
 @prefix rml: <https://w3id.org/conn/rml#>.
 @prefix ql: <http://semweb.mmlab.be/ns/ql#>.
 
+<> owl:imports <./node_modules/@ajuvercr/js-runner/ontology.ttl>.
 <> owl:imports <./get_weather.ttl>,
   <./node_modules/@ajuvercr/js-runner/channels/file.ttl>.
 
-<file> a :FileWriterChannel;
-  :fileOnReplace false;
-  :filePath <./output.txt>.
+<> owl:imports <./node_modules/rml-mapper-processor-ts/processors.ttl>.
+<mapping> a :FileReaderChannel;
+  :fileReadFirstContent true;
+  :fileOnReplace true;
+  :filePath <./mapping.ttl>.
 
 [ ] a js:GetWeather;
-  js:output <file>;
-  js:interval 500.
+  js:output <raw/writer>;
+  js:reader <mapping>;
+  js:interval 5000.
 
+<raw/writer> a js:JsWriterChannel.
+<raw/reader> a js:JsReaderChannel.
+[ ] a js:JsChannel;
+  :reader <raw/reader>;
+  :writer <raw/writer>.
+
+[ ] a js:RMLMapperReader;
+  js:rmlSource [
+    js:sourceLocation "./data/data_0.json";
+    js:input <raw/reader>;
+        js:trigger true
+  ];
+  js:rmlTarget [
+    js:targetLocation <file://./out-buienradar-change-sensors-change.nq>;
+    js:output <output>;
+  ], [
+    js:targetLocation <file://./out-buienradar-change-as-change.nq>;
+    js:output <output1>;
+  ], [
+    js:targetLocation <file://./out-buienradar-change-observations-change.nq>;
+    js:output <output2>;
+  ];
+  js:mappings <mapping>;
+  js:output <output3>;
+  js:appendMapping false;
+  js:rmlJar <./rmlmapper-6.3.0-r371-all.jar>.
+
+<output> a :FileWriterChannel;
+  :fileReadFirstContent "true";
+  :fileOnReplace true;
+  :filePath <./output.ttl>.
+
+<output1> a :FileWriterChannel;
+  :fileReadFirstContent "true";
+  :fileOnReplace true;
+  :filePath <./output1.ttl>.
+
+<output2> a :FileWriterChannel;
+  :fileReadFirstContent "true";
+  :fileOnReplace true;
+  :filePath <./output2.ttl>.
+
+<output3> a :FileWriterChannel;
+  :fileReadFirstContent "true";
+  :fileOnReplace true;
+  :filePath <./output3.ttl>.

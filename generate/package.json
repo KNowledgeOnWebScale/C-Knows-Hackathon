@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "@ajuvercr/js-runner": "^0.1.12"
+  },
+  "dependencies": {
+    "rml-mapper-processor-ts": "^0.3.3"
   }
 }

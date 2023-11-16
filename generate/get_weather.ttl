@@ -8,7 +8,6 @@
 @prefix dc: <http://purl.org/dc/terms/>.
 
 <> owl:imports <./node_modules/@ajuvercr/js-runner/ontology.ttl>.
-
 js:GetWeather a js:JsProcess;
   dc:title "GetWeather";
   dc:description "Periodically gets the weather";
@@ -25,6 +24,10 @@ js:GetWeather a js:JsProcess;
       a fnom:PositionParameterMapping;
       fnom:functionParameter "Fetch interval";
       fnom:implementationParameterPosition "1"^^xsd:int;
+    ], [
+      a fnom:PositionParameterMapping;
+      fnom:functionParameter "Reader";
+      fnom:implementationParameterPosition "2"^^xsd:int;
     ];
   ].
 
@@ -37,9 +40,15 @@ js:GetWeather a js:JsProcess;
     sh:maxCount 1;
     sh:minCount 1;
   ], [
-    sh:datatype xsd:string;
+    sh:datatype xsd:integer;
     sh:path js:interval;
     sh:name "Fetch interval";
     sh:maxCount 1;
+  ], [
+    sh:class :ReaderChannel;
+    sh:path js:reader;
+    sh:name "Reader";
+    sh:maxCount 1;
+    sh:minCount 1;
   ].
 
