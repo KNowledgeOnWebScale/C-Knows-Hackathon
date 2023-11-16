@@ -32,7 +32,7 @@ Running again leads to the [file](./out-buienradar-change-observations-change.nq
 If we want to start over again and remove the state, just remove it in the `/tmp` directory:
 
 ```sh
-rm kmi_sensor*
+rm /tmp/kmi_sensor*
 ```
 
 ### Integrated Raw data to real versioned LDES ft. SDS
@@ -45,4 +45,4 @@ TODO:
 
 ## Module 3
 
-TODO:
+TODO:	
