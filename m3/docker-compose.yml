@@ -1,0 +1,37 @@
+services:
+  ldes-server:
+    env_file:
+      - ./docker-compose/config.local.env
+    container_name: ldes.server
+    image: ldes/ldes-server:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./content:/opt/content
+    networks:
+      - ldes
+    depends_on:
+      - ldes-mongodb
+  
+  ldes-mongodb:
+    image: mongo
+    container_name: ldes.mongodb
+    ports:
+      - "27017:27017"
+    restart: always
+    networks:
+      - ldes
+  
+  virtuoso:
+    image: tenforce/virtuoso:latest
+    environment:
+      SPARQL_UPDATE: "true"
+    volumes:
+      - ./virtuoso:/data
+    ports:
+      - "8890:8890"
+    networks:
+      - ldes
+networks:
+  ldes:
+    driver: bridge
