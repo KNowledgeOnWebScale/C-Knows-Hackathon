@@ -1,0 +1,17 @@
+@prefix : <https://w3id.org/conn#>.
+@prefix js: <https://w3id.org/conn/js#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix rml: <https://w3id.org/conn/rml#>.
+@prefix ql: <http://semweb.mmlab.be/ns/ql#>.
+
+<> owl:imports <./get_weather.ttl>,
+  <./node_modules/@ajuvercr/js-runner/channels/file.ttl>.
+
+<file> a :FileWriterChannel;
+  :fileOnReplace false;
+  :filePath <./output.txt>.
+
+[ ] a js:GetWeather;
+  js:output <file>;
+  js:interval 500.
+
